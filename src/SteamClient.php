@@ -32,9 +32,9 @@ class SteamClient
 
         $res = $this->client->get($url, [
             'query' => $params,
-        ]);;
+        ]);
 
-        return $request->getResponse()->fromResponse($res);
+        return $request->createResponse($res);
     }
 
     public function getPlayerSummaries(array|string $steamIds): PlayerSummariesResponse

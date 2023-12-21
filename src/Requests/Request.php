@@ -18,8 +18,8 @@ abstract class Request
         return "https://api.steampowered.com/{$this->interface}/{$this->method}/{$this->version}/";
     }
 
-    public function getResponse(): Response
+    public function createResponse(...$response): Response
     {
-        return new $this->response();
+        return $this->response::fromResponse(...$response);
     }
 }
