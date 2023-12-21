@@ -5,9 +5,11 @@ namespace VineVax\SteamPHPApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use VineVax\SteamPHPApi\Requests\GlobalAchievementPercentagesForAppRequest;
 use VineVax\SteamPHPApi\Requests\NewsForAppRequest;
 use VineVax\SteamPHPApi\Requests\PlayerSummariesRequest;
 use VineVax\SteamPHPApi\Requests\Request;
+use VineVax\SteamPHPApi\Responses\GlobalAchievementPercentagesForAppResponse;
 use VineVax\SteamPHPApi\Responses\NewsForAppResponse;
 use VineVax\SteamPHPApi\Responses\PlayerSummariesResponse;
 use VineVax\SteamPHPApi\Responses\Response;
@@ -54,6 +56,13 @@ class SteamClient
             'appid' => $appId,
             'count' => $count,
             'maxlength' => $maxLength,
+        ]);
+    }
+
+    public function getGlobalAchievementPercentagesForApp(int $appId): GlobalAchievementPercentagesForAppResponse
+    {
+        return $this->sendRequest(new GlobalAchievementPercentagesForAppRequest(), [
+            'gameid' => $appId,
         ]);
     }
 }
