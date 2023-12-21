@@ -9,6 +9,7 @@ use VineVax\SteamPHPApi\Enums\Language;
 use VineVax\SteamPHPApi\Requests\FriendListRequest;
 use VineVax\SteamPHPApi\Requests\GlobalAchievementPercentagesForAppRequest;
 use VineVax\SteamPHPApi\Requests\NewsForAppRequest;
+use VineVax\SteamPHPApi\Requests\OwnedGamesRequest;
 use VineVax\SteamPHPApi\Requests\PlayerAchievementsRequest;
 use VineVax\SteamPHPApi\Requests\PlayerSummariesRequest;
 use VineVax\SteamPHPApi\Requests\Request;
@@ -16,6 +17,7 @@ use VineVax\SteamPHPApi\Requests\UserStatsForGameRequest;
 use VineVax\SteamPHPApi\Responses\FriendListResponse;
 use VineVax\SteamPHPApi\Responses\GlobalAchievementPercentagesForAppResponse;
 use VineVax\SteamPHPApi\Responses\NewsForAppResponse;
+use VineVax\SteamPHPApi\Responses\OwnedGamesResponse;
 use VineVax\SteamPHPApi\Responses\PlayerAchievementsResponse;
 use VineVax\SteamPHPApi\Responses\PlayerSummariesResponse;
 use VineVax\SteamPHPApi\Responses\Response;
@@ -96,6 +98,15 @@ class SteamClient
             'steamid' => $steamId,
             'appid' => $appId,
             'l' => $language->value,
+        ]);
+    }
+
+    public function getOwnedGames(int $steamId, bool $includeAppInfo = false, $includeFreeGames = false): OwnedGamesResponse
+    {
+        return $this->sendRequest(new OwnedGamesRequest(), [
+            'steamid' => $steamId,
+            'include_appinfo' => $includeAppInfo,
+            'include_played_free_games' => $includeFreeGames,
         ]);
     }
 }
