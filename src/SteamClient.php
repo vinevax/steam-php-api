@@ -53,7 +53,7 @@ class SteamClient
         );
     }
 
-    public function getPlayerSummaries(array|string $steamIds): PlayerSummariesResponse
+    public function getPlayerSummaries(array|int $steamIds): PlayerSummariesResponse
     {
         return $this->sendRequest(new PlayerSummariesRequest(), [
             'steamids' => is_array($steamIds) ? implode(',', $steamIds) : $steamIds,
@@ -76,7 +76,7 @@ class SteamClient
         ]);
     }
 
-    public function getFriendList($steamId, $relationship = 'friend'): FriendListResponse
+    public function getFriendList(int $steamId, $relationship = 'friend'): FriendListResponse
     {
         return $this->sendRequest(new FriendListRequest(), [
             'steamid' => $steamId,
@@ -84,7 +84,7 @@ class SteamClient
         ]);
     }
 
-    public function getPlayerAchievements($steamId, $appId, Language $language = Language::ENGLISH): PlayerAchievementsResponse
+    public function getPlayerAchievements(int $steamId, int $appId, Language $language = Language::ENGLISH): PlayerAchievementsResponse
     {
         return $this->sendRequest(new PlayerAchievementsRequest(), [
             'steamid' => $steamId,
@@ -93,7 +93,7 @@ class SteamClient
         ]);
     }
 
-    public function getUserStatsForGame($steamId, $appId, Language $language = Language::ENGLISH): UserStatsForGameResponse
+    public function getUserStatsForGame(int $steamId, int $appId, Language $language = Language::ENGLISH): UserStatsForGameResponse
     {
         return $this->sendRequest(new UserStatsForGameRequest(), [
             'steamid' => $steamId,
