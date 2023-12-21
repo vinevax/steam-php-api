@@ -21,6 +21,8 @@ readonly class PlayerAchievementsResponse implements Response
                     $achievement['apiname'] ?? null,
                     $achievement['achieved'] ?? null,
                     $achievement['unlocktime'] ?? null,
+                    $achievement['name'] ?? null,
+                    $achievement['description'] ?? null,
                 ), $response['playerstats']['achievements'] ?? []),
                 $response['playerstats']['success'] ?? null,
             )

@@ -13,6 +13,8 @@ readonly class Achievement
         public ?string $apiName = null,
         ?int $achieved = null,
         ?int $unlockTime = null,
+        public ?string $name = null,
+        public ?string $description = null,
     ) {
         $this->achieved = $achieved === 1;
         $this->unlockTime = DateTimeImmutable::createFromFormat('U', $unlockTime);

@@ -5,6 +5,7 @@ namespace VineVax\SteamPHPApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use VineVax\SteamPHPApi\Enums\Language;
 use VineVax\SteamPHPApi\Requests\FriendListRequest;
 use VineVax\SteamPHPApi\Requests\GlobalAchievementPercentagesForAppRequest;
 use VineVax\SteamPHPApi\Requests\NewsForAppRequest;
@@ -78,11 +79,12 @@ class SteamClient
         ]);
     }
 
-    public function getPlayerAchievements($steamId, $appId): PlayerAchievementsResponse
+    public function getPlayerAchievements($steamId, $appId, Language $language = Language::ENGLISH): PlayerAchievementsResponse
     {
         return $this->sendRequest(new PlayerAchievementsRequest(), [
             'steamid' => $steamId,
             'appid' => $appId,
+            'l' => $language->value,
         ]);
     }
 }
