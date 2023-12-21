@@ -3,20 +3,14 @@
 namespace VineVax\SteamPHPApi\Responses;
 
 use VineVax\SteamPHPApi\Models\Player;
-use VineVax\SteamPHPApi\Models\Test;
 
-class PlayerSummariesResponse implements Response
+readonly class PlayerSummariesResponse implements Response
 {
 
     public function __construct(
         /* @var Player[] */
-        private array $players = [],
+        public array $players = [],
     ) {}
-
-    public function getPlayers(): array
-    {
-        return $this->players;
-    }
 
     public static function fromResponse($response): self
     {
