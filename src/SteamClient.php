@@ -5,10 +5,12 @@ namespace VineVax\SteamPHPApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use VineVax\SteamPHPApi\Requests\FriendListRequest;
 use VineVax\SteamPHPApi\Requests\GlobalAchievementPercentagesForAppRequest;
 use VineVax\SteamPHPApi\Requests\NewsForAppRequest;
 use VineVax\SteamPHPApi\Requests\PlayerSummariesRequest;
 use VineVax\SteamPHPApi\Requests\Request;
+use VineVax\SteamPHPApi\Responses\FriendListResponse;
 use VineVax\SteamPHPApi\Responses\GlobalAchievementPercentagesForAppResponse;
 use VineVax\SteamPHPApi\Responses\NewsForAppResponse;
 use VineVax\SteamPHPApi\Responses\PlayerSummariesResponse;
@@ -63,6 +65,14 @@ class SteamClient
     {
         return $this->sendRequest(new GlobalAchievementPercentagesForAppRequest(), [
             'gameid' => $appId,
+        ]);
+    }
+
+    public function getFriendList($steamId, $relationship = 'friend'): FriendListResponse
+    {
+        return $this->sendRequest(new FriendListRequest(), [
+            'steamid' => $steamId,
+            'relationship' => $relationship,
         ]);
     }
 }
