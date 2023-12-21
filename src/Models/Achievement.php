@@ -7,7 +7,7 @@ use DateTimeImmutable;
 readonly class Achievement
 {
     public bool $achieved;
-    public DateTimeImmutable $unlockTime;
+    public ?DateTimeImmutable $unlockTime;
 
     public function __construct(
         public ?string $apiName = null,
@@ -17,6 +17,6 @@ readonly class Achievement
         public ?string $description = null,
     ) {
         $this->achieved = $achieved === 1;
-        $this->unlockTime = DateTimeImmutable::createFromFormat('U', $unlockTime);
+        $this->unlockTime = $unlockTime ? DateTimeImmutable::createFromFormat('U', $unlockTime): null;
     }
 }

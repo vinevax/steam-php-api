@@ -10,5 +10,6 @@ readonly class PlayerStats
         /* @type $achievements Achievement[] */
         public ?array $achievements,
         public ?bool $success,
+        public ?array $stats = null,
     ){}
 }

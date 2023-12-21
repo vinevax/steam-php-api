@@ -12,12 +12,14 @@ use VineVax\SteamPHPApi\Requests\NewsForAppRequest;
 use VineVax\SteamPHPApi\Requests\PlayerAchievementsRequest;
 use VineVax\SteamPHPApi\Requests\PlayerSummariesRequest;
 use VineVax\SteamPHPApi\Requests\Request;
+use VineVax\SteamPHPApi\Requests\UserStatsForGameRequest;
 use VineVax\SteamPHPApi\Responses\FriendListResponse;
 use VineVax\SteamPHPApi\Responses\GlobalAchievementPercentagesForAppResponse;
 use VineVax\SteamPHPApi\Responses\NewsForAppResponse;
 use VineVax\SteamPHPApi\Responses\PlayerAchievementsResponse;
 use VineVax\SteamPHPApi\Responses\PlayerSummariesResponse;
 use VineVax\SteamPHPApi\Responses\Response;
+use VineVax\SteamPHPApi\Responses\UserStatsForGameResponse;
 
 class SteamClient
 {
@@ -82,6 +84,15 @@ class SteamClient
     public function getPlayerAchievements($steamId, $appId, Language $language = Language::ENGLISH): PlayerAchievementsResponse
     {
         return $this->sendRequest(new PlayerAchievementsRequest(), [
+            'steamid' => $steamId,
+            'appid' => $appId,
+            'l' => $language->value,
+        ]);
+    }
+
+    public function getUserStatsForGame($steamId, $appId, Language $language = Language::ENGLISH): UserStatsForGameResponse
+    {
+        return $this->sendRequest(new UserStatsForGameRequest(), [
             'steamid' => $steamId,
             'appid' => $appId,
             'l' => $language->value,
