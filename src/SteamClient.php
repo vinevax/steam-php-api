@@ -12,6 +12,7 @@ use VineVax\SteamPHPApi\Requests\NewsForAppRequest;
 use VineVax\SteamPHPApi\Requests\OwnedGamesRequest;
 use VineVax\SteamPHPApi\Requests\PlayerAchievementsRequest;
 use VineVax\SteamPHPApi\Requests\PlayerSummariesRequest;
+use VineVax\SteamPHPApi\Requests\RecentlyPlayedGamesRequest;
 use VineVax\SteamPHPApi\Requests\Request;
 use VineVax\SteamPHPApi\Requests\UserStatsForGameRequest;
 use VineVax\SteamPHPApi\Responses\FriendListResponse;
@@ -107,6 +108,14 @@ class SteamClient
             'steamid' => $steamId,
             'include_appinfo' => $includeAppInfo,
             'include_played_free_games' => $includeFreeGames,
+        ]);
+    }
+
+    public function getRecentlyPlayedGames(int $steamId, int $count = null)
+    {
+        return $this->sendRequest(new RecentlyPlayedGamesRequest(), [
+            'steamid' => $steamId,
+            'count' => $count,
         ]);
     }
 }
