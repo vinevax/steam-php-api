@@ -36,7 +36,9 @@ class SteamClient
             'query' => $params,
         ]);
 
-        return $request->createResponse($res);
+        return $request->createResponse(
+            json_decode($res->getBody()->getContents(), true)
+        );
     }
 
     public function getPlayerSummaries(array|string $steamIds): PlayerSummariesResponse

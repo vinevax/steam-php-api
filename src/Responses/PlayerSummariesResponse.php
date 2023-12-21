@@ -14,8 +14,6 @@ readonly class PlayerSummariesResponse implements Response
 
     public static function fromResponse($response): self
     {
-        $response = json_decode($response->getBody()->getContents(), true);
-
         $players = array_map(function (array $player) {
             return new Player(
                 $player['steamid'] ?? null,

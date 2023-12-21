@@ -15,8 +15,6 @@ readonly class NewsForAppResponse implements Response
 
     public static function fromResponse($response): self
     {
-        $response = json_decode($response->getBody()->getContents(), true);
-
         return new self(
             $response['appnews']['appid'],
             array_map(fn($item) => new NewsItem(
