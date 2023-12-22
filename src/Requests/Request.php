@@ -7,15 +7,16 @@ use VineVax\SteamPHPApi\Responses\Response;
 abstract class Request
 {
     public function __construct(
-        private readonly string  $version,
-        private readonly string  $interface,
-        private readonly  string $method,
-        private readonly string  $response,
+        private readonly ?string $version = null,
+        private readonly ?string $interface = null,
+        private readonly ?string $method = null,
+        private readonly ?string $response = null,
+        private readonly string $base = 'https://api.steampowered.com',
     ) {}
 
     public function getUrl(): string
     {
-        return "https://api.steampowered.com/{$this->interface}/{$this->method}/{$this->version}/";
+        return "{$this->base}/{$this->interface}/{$this->method}/{$this->version}/";
     }
 
     public function createResponse(...$response): Response
