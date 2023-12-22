@@ -18,8 +18,8 @@ readonly class RecentlyPlayedGamesResponse implements Response
             array_map(fn($game) => new Game(
                 $game['appid'] ?? null,
                 $game['name'] ?? null,
-                $game['playtime_2weeks'] ?? null,
                 $game['playtime_forever'] ?? null,
+                $game['playtime_2weeks'] ?? null,
                 $game['img_icon_url'] ?? null,
                 $game['img_logo_url'] ?? null,
                 $game['has_community_visible_stats'] ?? null,
