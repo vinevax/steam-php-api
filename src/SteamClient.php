@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use VineVax\SteamPHPApi\Enums\Language;
+use VineVax\SteamPHPApi\Requests\AppDetailsRequest;
 use VineVax\SteamPHPApi\Requests\FriendListRequest;
 use VineVax\SteamPHPApi\Requests\GlobalAchievementPercentagesForAppRequest;
 use VineVax\SteamPHPApi\Requests\NewsForAppRequest;
@@ -15,6 +16,7 @@ use VineVax\SteamPHPApi\Requests\PlayerSummariesRequest;
 use VineVax\SteamPHPApi\Requests\RecentlyPlayedGamesRequest;
 use VineVax\SteamPHPApi\Requests\Request;
 use VineVax\SteamPHPApi\Requests\UserStatsForGameRequest;
+use VineVax\SteamPHPApi\Responses\AppDetailsResponse;
 use VineVax\SteamPHPApi\Responses\FriendListResponse;
 use VineVax\SteamPHPApi\Responses\GlobalAchievementPercentagesForAppResponse;
 use VineVax\SteamPHPApi\Responses\NewsForAppResponse;
@@ -38,11 +40,13 @@ class SteamClient
     /**
      * @throws GuzzleException
      */
-    private function sendRequest(Request $request, $params = []): Response
+    private function sendRequest(Request $request, $params = [], bool $requiresKey = true): Response
     {
         $url = $request->getUrl();
 
-        $params['key'] = $this->apiKey;
+        if ($requiresKey) {
+            $params['key'] = $this->apiKey;
+        }
 
         $res = $this->client->get($url, [
             'query' => $params,
@@ -117,5 +121,13 @@ class SteamClient
             'steamid' => $steamId,
             'count' => $count,
         ]);
+    }
+
+    public function getAppDetails(int $appId, Language $language = Language::ENGLISH): AppDetailsResponse
+    {
+        return $this->sendRequest(new AppDetailsRequest(), [
+            'appids' => $appId,
+            'l' => $language->value,
+        ], false);
     }
 }
